@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import EntryBox from 'components/EntryBox';
 import MainSection from 'components/MainSection';
 import Scoreboard from 'components/Scoreboard';
+import Sidebar from 'components/Sidebar';
 import { createTopic, typing, incrementCount,
   decrementCount, destroyTopic, fetchTopics } from 'actions/topics';
 import styles from 'css/components/vote';
@@ -19,8 +20,9 @@ class Vote extends Component {
   ]
 
   render() {
-    const {newTopic, topics, typing, createTopic, destroyTopic, incrementCount, decrementCount } = this.props;
+    const {newTopic, topics, typing, createTopic, destroyTopic, incrementCount, decrementCount, user} = this.props;
     return (
+      <div>
       <div className={cx('vote')}>
         <EntryBox topic={newTopic}
           onEntryChange={typing}
@@ -30,7 +32,11 @@ class Vote extends Component {
           onDecrement={decrementCount}
           onDestroy={destroyTopic} />
         <Scoreboard topics={topics} />
+        
       </div>
+      <Sidebar topics={topics} user={user}  />
+      </div>
+     
     );
   }
 }
@@ -42,11 +48,13 @@ Vote.propTypes = {
   destroyTopic: PropTypes.func.isRequired,
   incrementCount: PropTypes.func.isRequired,
   decrementCount: PropTypes.func.isRequired,
-  newTopic: PropTypes.string
+  newTopic: PropTypes.string,
+  user: Proptypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
+    user:state.user,
     topics: state.topic.topics,
     newTopic: state.topic.newTopic
   };
