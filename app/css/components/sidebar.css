@@ -1,0 +1,49 @@
+@import '../common/typography';
+@import '../common/layout';
+@import '../common/card';
+
+.sidebar {
+  @apply --card;
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  top: 120px;
+  right: 0;
+  background-color: white;
+
+}
+
+.header {
+  @apply --title;
+  @apply --subHeading;
+  color: #2196f3;
+  background: #fff;
+}
+
+.list {
+  padding: 16px;
+  list-style:inline;
+  
+}
+
+.item {
+  display: flex;
+  list-style:inline;
+  justify-content: space-between;
+}
+ol {
+    counter-reset: section;
+}
+ol li::before {
+  counter-increment: section ;                /* Increment the list item counter*/
+  content: counter(section) ". "; /* Display the counter */
+}
+.topic {
+  @apply --flexNotMoreThan200;
+  font-size: var(--fontMedium);
+}
+.count{
+  color:#aaa;
+}
+
+
